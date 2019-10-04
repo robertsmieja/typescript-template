@@ -1,5 +1,6 @@
 const path = require("path")
 const webpack = require("webpack")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
 module.exports = {
   entry: "./src/index.ts",
@@ -16,7 +17,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [new webpack.NoEmitOnErrorsPlugin()],
+  plugins: [new CleanWebpackPlugin(), new webpack.NoEmitOnErrorsPlugin()],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },

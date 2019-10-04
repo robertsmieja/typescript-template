@@ -12,6 +12,7 @@
     "@typescript-eslint/parser": "^2.3.2",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^6.0.3",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.3.0",
@@ -61,7 +62,7 @@
   "name": "typescript-template",
   "private": true,
   "scripts": {
-    "build": "npm run script build:prod",
+    "build": "npm run-script build:prod",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.dev.js",
     "lint": "eslint ./src/**/*",
