@@ -7,13 +7,10 @@
     "@babel/preset-typescript": "^7.7.2",
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.11",
-    "@types/webpack-env": "^1.14.1",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
-    "cross-env": "^6.0.3",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -22,12 +19,7 @@
     "lint-staged": "^9.4.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
-    "source-map-loader": "^0.2.4",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-merge": "^4.2.2"
+    "typescript": "^3.7.2"
   },
   "engines": {
     "node": ">=10",
@@ -44,8 +36,7 @@
     "typescript",
     "nodejs",
     "template",
-    "babel",
-    "webpack"
+    "babel"
   ],
   "license": "MIT",
   "lint-staged": {
@@ -58,21 +49,25 @@
       "git add"
     ]
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "name": "typescript-template",
   "private": true,
   "scripts": {
-    "build": "npm run-script build:prod",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.dev.js",
+    "build": "npm-run-all --parallel build:js lint",
+    "build:js": "tsc",
+    "clean": "rimraf dist/",
     "lint": "eslint ./src/**/*",
     "lint:staged": "lint-staged",
     "lint:fix": "eslint --fix ./src/**/*",
     "prettier": "prettier --write '*.{js,ts,jsx,tsx,json,md}'",
-    "start": "run-s build:dev start:dev",
+    "prepare": "npm-run-all clean build",
+    "prepublishOnly": "npm-run-all --parallel test lint",
+    "prestart": "npm run-script build",
+    "start": "npm-run-all build:dev start:dev",
     "start:dev": "node dist/bundle.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "version": "npm run lint:fix && git add -A src"
   },
-  "version": "0.1.0"
+  "version": "0.0.1"
 }
