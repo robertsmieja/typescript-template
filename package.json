@@ -19,6 +19,7 @@
     "lint-staged": "^9.4.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
     "typescript": "^3.7.2"
   },
   "engines": {
@@ -63,8 +64,7 @@
     "prepare": "npm-run-all clean build",
     "prepublishOnly": "npm-run-all --parallel test lint",
     "prestart": "npm run-script build",
-    "start": "npm-run-all build:dev start:dev",
-    "start:dev": "node dist/bundle.js",
+    "start": "node dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "version": "npm run lint:fix && git add -A src"
