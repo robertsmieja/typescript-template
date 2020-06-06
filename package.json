@@ -18,6 +18,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   },
   "files": [
@@ -60,13 +61,12 @@
     "lint:staged": "lint-staged",
     "lint:fix": "eslint --fix ./src/**/*",
     "prettier": "prettier --write '*.{js,ts,jsx,tsx,json,md}'",
-    "prepare": "npm-run-all clean build",
     "prepublishOnly": "npm-run-all --parallel test lint",
-    "prestart": "npm run-script build",
-    "start": "node dist/index.js",
+    "prestart": "npm run-script lint",
+    "start": "ts-node src/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "version": "npm run lint:fix && git add -A src"
   },
-  "version": "0.0.1"
+  "version": "0.0.0"
 }
